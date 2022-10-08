@@ -5,6 +5,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ramo.newsapp.R
 import com.ramo.newsapp.core.BaseFragment
+import com.ramo.newsapp.core.ext.observeExt
 import com.ramo.newsapp.databinding.FragmentFavoriteBinding
 import com.ramo.newsapp.domain.model.News
 import com.ramo.newsapp.ui.common.viewholder.NewsViewHolder
@@ -21,7 +22,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         safeBinding {
             vm = favViewModel
             changeStatusBarColor(toolbar)
-            rv.render { parent: ViewGroup, _: Int, _: News -> NewsViewHolder(parent) }
+            rv.render { parent: ViewGroup, _: Int, _: News ->
+                NewsViewHolder(
+                    parent,
+                    onFavClick = ::onFavClick
+                )
+            }
             rv.setOnItemClickListener { _, _, data: News ->
                 findNavController().navigate(
                     FavoriteFragmentDirections.actionFavoriteFragmentToNewsDetailFragment(
@@ -30,5 +36,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
                 )
             }
         }
+        observeExt(favViewModel.news) {
+            binding?.rv?.notifyDataSetChanged()
+        }
+    }
+
+    private fun onFavClick(news: News) {
+        favViewModel.changeFavorite(news)
     }
 }

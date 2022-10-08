@@ -22,12 +22,13 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    fun addFavorite(news: News) {
-        news.isFavorite = true
+    fun changeFavorite(news: News) {
         if (_news.value == null)
-            _news.value = mutableListOf(news)
-        else
-            _news.value?.add(0, news)
+            _news.value = mutableListOf()
+
+        news.isFavorite = news.isFavorite.not()
+        if (news.isFavorite && _news.value?.contains(news) == false) _news.value?.add(0, news)
+        else _news.value?.remove(news)
         _news.value = _news.value
     }
 }

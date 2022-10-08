@@ -1,13 +1,16 @@
 package com.ramo.newsapp.ui.newsdetail
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.sharp.Favorite
+import androidx.compose.material.icons.rounded.Bookmark
+import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material.icons.sharp.OpenInBrowser
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,6 +20,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import coil.compose.AsyncImage
 import com.ramo.newsapp.core.BaseComposeFragment
+import com.ramo.newsapp.core.ext.observeExt
 import com.ramo.newsapp.ui.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,15 +30,26 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
 
     private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeExt(favoriteViewModel.news) { viewModel.checkFavStatus(it) }
+    }
+
     override fun content(): ComposeView = createComposeView {
         MaterialTheme {
             Scaffold(
                 floatingActionButton = {
                     Column {
                         FloatingActionButton(onClick = {
-                            favoriteViewModel.addFavorite(viewModel.news)
+                            favoriteViewModel.changeFavorite(viewModel.news)
                         }) {
-                            Icon(imageVector = Icons.Sharp.Favorite, contentDescription = "")
+                            Icon(
+                                imageVector = if (viewModel.isFavorite)
+                                    Icons.Rounded.Bookmark
+                                else
+                                    Icons.Rounded.BookmarkBorder,
+                                contentDescription = ""
+                            )
                         }
                         Spacer(modifier = Modifier.size(8.dp))
                         FloatingActionButton(onClick = {

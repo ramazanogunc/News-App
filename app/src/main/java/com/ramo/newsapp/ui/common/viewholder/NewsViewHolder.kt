@@ -7,7 +7,8 @@ import com.ramo.newsapp.domain.model.News
 import com.ramo.sweetrecycler.DBSweetViewHolder
 
 class NewsViewHolder(
-    viewGroup: ViewGroup?
+    viewGroup: ViewGroup?,
+    private val onFavClick: (News) -> Unit
 ) : DBSweetViewHolder<ItemNewsBinding, News>(
     layoutId = R.layout.item_news,
     viewGroup = viewGroup
@@ -15,7 +16,10 @@ class NewsViewHolder(
 
     override fun bind(data: News) {
         binding.item = data
+        binding.holder = this
         binding.executePendingBindings()
     }
+
+    fun onFavoriteClick(data: News) = onFavClick(data)
 
 }

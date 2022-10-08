@@ -4,49 +4,41 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="com.ramo.newsapp.domain.model.News" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="4dp"
-        app:cardCornerRadius="8dp">
+        android:layout_marginVertical="4dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgNews"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/bg_image_corner_radius"
+            android:contentDescription="Haber Fotoğrafı"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:cornerRadius="@{16}"
+            bind:imageUrl="@{item.imageUrl}" />
 
-            <ImageView
-                android:id="@+id/imgNews"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:background="@drawable/bg_image_corner_radius"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                bind:cornerRadius="@{16}"
-                bind:imageUrl="@{item.imageUrl}"
-                android:contentDescription="Haber Fotoğrafı" />
+        <TextView
+            style="@style/H2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{item.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgNews"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Deneme Haber yazısı" />
 
-            <TextView
-                style="@style/H2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="@{item.title}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imgNews"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Deneme Haber yazısı" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

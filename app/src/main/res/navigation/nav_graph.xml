@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ramo.newsapp.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_newsDetailFragment2"
+            app:destination="@id/newsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.ramo.newsapp.ui.newsdetail.NewsDetailFragment"
+        android:label="NewsDetailFragment" >
+        <argument
+            android:name="news"
+            app:argType="com.ramo.newsapp.domain.model.News" />
+    </fragment>
 </navigation>

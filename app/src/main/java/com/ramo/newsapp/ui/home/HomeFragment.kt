@@ -1,6 +1,5 @@
 package com.ramo.newsapp.ui.home
 
-import android.content.res.Resources
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
@@ -44,7 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         window.statusBarColor = color
     }
 
-    private fun removeStatusBarColor()  {
+    private fun removeStatusBarColor() {
         val window = activity?.window ?: return
         window.clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         @Suppress("DEPRECATION")

@@ -15,9 +15,17 @@
     <fragment
         android:id="@+id/newsDetailFragment"
         android:name="com.ramo.newsapp.ui.newsdetail.NewsDetailFragment"
-        android:label="NewsDetailFragment" >
+        android:label="NewsDetailFragment">
         <argument
             android:name="news"
             app:argType="com.ramo.newsapp.domain.model.News" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.ramo.newsapp.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment">
+        <action
+            android:id="@+id/action_favoriteFragment_to_newsDetailFragment"
+            app:destination="@id/newsDetailFragment" />
     </fragment>
 </navigation>

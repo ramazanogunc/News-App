@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
@@ -12,6 +13,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.color.MaterialColors
 import com.ramo.newsapp.BR
 import com.ramo.newsapp.R
 import com.ramo.newsapp.core.ext.findGenericWithType
@@ -54,6 +56,7 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel>(
     }
 
     override fun onDestroyView() {
+        removeStatusBarColor()
         binding = null
         super.onDestroyView()
     }
@@ -76,7 +79,7 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel>(
         viewModel = ViewModelProvider(
             if (isSharedViewModel()) requireActivity() else this
         )[vmClass]
-        binding?.setVariable(BR.vm,viewModel)
+        binding?.setVariable(BR.vm, viewModel)
     }
 
     protected open fun onChangeLoading(isLoading: Boolean) {
@@ -115,6 +118,23 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel>(
     protected fun safeBinding(block: DB.() -> Unit) {
         val safeBinding = binding ?: return
         with(safeBinding, block)
+    }
+
+    protected fun changeStatusBarColor(view: View?) {
+        view ?: return
+        val window = activity?.window ?: return
+        val color = MaterialColors.getColor(view, androidx.appcompat.R.attr.colorPrimary)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        @Suppress("DEPRECATION")
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = color
+    }
+
+    protected fun removeStatusBarColor() {
+        val window = activity?.window ?: return
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        @Suppress("DEPRECATION")
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     }
 
     protected abstract fun init()

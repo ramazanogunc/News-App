@@ -6,6 +6,7 @@ import com.ramo.newsapp.core.BaseViewModel
 import com.ramo.newsapp.domain.model.News
 import com.ramo.newsapp.domain.usecase.ChangeFavoriteUseCase
 import com.ramo.newsapp.domain.usecase.GetFavoritesUseCase
+import com.ramo.newsapp.util.FrEventHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -41,8 +42,10 @@ class FavoriteViewModel @Inject constructor(
     private fun findAndChangeStatus(news: News) {
         if (news.isFavorite) {
             _news.value?.add(0, news)
+            FrEventHelper.addToFavorites(news)
         } else {
             _news.value?.removeAll { it.diffId == news.diffId }
+            FrEventHelper.removeFromFavorites(news)
         }
 
     }

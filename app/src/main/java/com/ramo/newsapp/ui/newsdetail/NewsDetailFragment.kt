@@ -1,52 +1,88 @@
 package com.ramo.newsapp.ui.newsdetail
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.Favorite
+import androidx.compose.material.icons.sharp.OpenInBrowser
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import com.ramo.newsapp.core.BaseComposeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
 
-    override fun content(): ComposeView = composableView {
+    override fun content(): ComposeView = createComposeView {
         MaterialTheme {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
+            Scaffold(
+                floatingActionButton = {
+                    Column {
+                        FloatingActionButton(onClick = { /*TODO*/ }) {
+                            Icon(imageVector = Icons.Sharp.Favorite, contentDescription = "")
+                        }
+                        Spacer(modifier = Modifier.size(8.dp))
+                        FloatingActionButton(onClick = {
+                            val browserIntent =
+                                Intent(Intent.ACTION_VIEW, viewModel.news.url.toUri())
+                            startActivity(browserIntent)
+                        }) {
+                            Icon(imageVector = Icons.Sharp.OpenInBrowser, contentDescription = "")
+                        }
+                    }
+                }
             ) {
-                AsyncImage(
-                    modifier = Modifier.fillMaxWidth(),
-                    model = viewModel.news.imageUrl,
-                    contentDescription = null
-                )
-                Row(
-                    modifier = Modifier
-                        .height(IntrinsicSize.Min)
-                        .padding(16.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .background(Color.Green, shape = RoundedCornerShape(3.dp))
-                            .width(6.dp)
-                            .fillMaxHeight()
-                    )
-                    Text(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 8.dp),
-                        text = viewModel.news.title,
-                        style = MaterialTheme.typography.h5
-                    )
+
+                Spacer(modifier = Modifier.size(it.calculateBottomPadding()))
+                LazyColumn {
+                    item {
+                        AsyncImage(
+                            modifier = Modifier.fillMaxWidth(),
+                            model = viewModel.news.imageUrl,
+                            contentDescription = null
+                        )
+                    }
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .height(IntrinsicSize.Min)
+                                .padding(16.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .background(Color.Green, shape = RoundedCornerShape(3.dp))
+                                    .width(6.dp)
+                                    .fillMaxHeight()
+                            )
+                            Text(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 8.dp),
+                                text = viewModel.news.title,
+                                style = MaterialTheme.typography.h5
+                            )
+                        }
+                    }
+                    item {
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 8.dp),
+                            text = viewModel.news.content,
+                            style = MaterialTheme.typography.body1
+                        )
+                    }
                 }
             }
+
         }
     }
-
 }

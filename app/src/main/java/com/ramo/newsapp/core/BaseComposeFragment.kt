@@ -1,7 +1,9 @@
 package com.ramo.newsapp.core
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.runtime.Composable
@@ -18,7 +20,7 @@ import com.ramo.newsapp.core.state.DialogEvent
 import com.ramo.newsapp.core.state.NavEvent
 import com.ramo.newsapp.cusomviews.LoadingDialog
 
-abstract class BaseComposeFragment<VM : BaseViewModel> : Fragment(R.layout.fragment_compose) {
+abstract class BaseComposeFragment<VM : BaseViewModel> : Fragment() {
 
     protected lateinit var viewModel: VM
 
@@ -29,6 +31,14 @@ abstract class BaseComposeFragment<VM : BaseViewModel> : Fragment(R.layout.fragm
         }
     }
     protected val loadingDialog by lazy { LoadingDialog(requireContext()) }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return content()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,16 +102,16 @@ abstract class BaseComposeFragment<VM : BaseViewModel> : Fragment(R.layout.fragm
 
     protected abstract fun content(): ComposeView
 
-    fun composableView(
+    fun createComposeView(
         content: @Composable () -> Unit
     ): ComposeView {
-        val composeView = view?.findViewById<ComposeView>(R.id.composeView)
-        composeView?.apply {
+        val composeView = ComposeView(requireContext())
+        composeView.apply {
             setViewCompositionStrategy(
                 ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner)
             )
             setContent(content)
         }
-        return composeView ?: throw IllegalStateException("Plase inflate fragment_compose file")
+        return composeView
     }
 }

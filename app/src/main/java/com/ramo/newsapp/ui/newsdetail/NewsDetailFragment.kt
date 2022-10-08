@@ -16,8 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
 
-    override fun init(): ComposeView = ComposeView(requireContext()).apply {
-        setContent {
+    override fun content(): ComposeView = composableView {
+        MaterialTheme {
             Column(
                 modifier = Modifier.fillMaxWidth(),
             ) {
@@ -27,7 +27,9 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
                     contentDescription = null
                 )
                 Row(
-                    modifier = Modifier.height(IntrinsicSize.Min).padding(16.dp)
+                    modifier = Modifier
+                        .height(IntrinsicSize.Min)
+                        .padding(16.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -43,8 +45,6 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
                         style = MaterialTheme.typography.h5
                     )
                 }
-
-
             }
         }
     }

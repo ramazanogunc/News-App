@@ -10,17 +10,26 @@ class FakeRepository : NewsRepository {
             News(
                 "Mükkemel Haber 1 ",
                 "https://thumbs.dreamstime.com/b/elkos-men-174306777.jpg",
-                false
+                "",
+                "",
+                "",
+                false,
             ),
             News(
                 "Mükkemel Haber 2 ",
                 "https://thumbs.dreamstime.com/b/elkos-men-174306777.jpg",
-                false
+                "",
+                "",
+                "",
+                false,
             ),
             News(
                 "Mükkemel Haber 3 ",
                 "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-600w-664193623.jpg",
-                false
+                "",
+                "",
+                "",
+                false,
             )
         )
     }

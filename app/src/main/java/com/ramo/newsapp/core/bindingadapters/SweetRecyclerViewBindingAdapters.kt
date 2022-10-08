@@ -7,7 +7,8 @@ object SweetRecyclerViewBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("list")
-    fun <T> SweetRecyclerView.list(list: List<T>) {
+    fun <T> SweetRecyclerView.list(list: List<T>?) {
+        list ?: return
         if (isPaginationEnable) addData(list)
         else setData(list)
 

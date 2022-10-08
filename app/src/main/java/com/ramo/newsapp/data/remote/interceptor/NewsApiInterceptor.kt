@@ -7,9 +7,12 @@ import okhttp3.Response
 class NewsApiInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request().newBuilder()
-            .addHeader("apiKey", BuildConfig.NEWS_API_KEY)
+        val url = chain
+            .request()
+            .url
+            .newBuilder()
+            .addQueryParameter("apiKey", BuildConfig.NEWS_API_KEY)
             .build()
-        return chain.proceed(request)
+        return chain.proceed(chain.request().newBuilder().url(url).build())
     }
 }

@@ -2,7 +2,9 @@ package com.ramo.newsapp.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.ramo.newsapp.data.remote.ExampleService
+import com.ramo.newsapp.data.remote.NewsService
+import com.ramo.newsapp.data.remote.RemoteDataSource
+import com.ramo.newsapp.data.remote.RemoteDataSourceImpl
 import com.ramo.newsapp.data.remote.interceptor.NewsApiInterceptor
 import dagger.Module
 import dagger.Provides
@@ -52,9 +54,19 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideExampleService(
+    fun provideNewsService(
         retrofit: Retrofit
-    ): ExampleService {
-        return retrofit.create(ExampleService::class.java)
+    ): NewsService {
+        return retrofit.create(NewsService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        newsService: NewsService
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(newsService)
+    }
+
+
 }

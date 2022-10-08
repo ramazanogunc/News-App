@@ -7,8 +7,11 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class News(
     val title: String,
+    val description: String,
+    val content: String,
     val imageUrl: String,
-    var isFavorite: Boolean
+    val url: String,
+    var isFavorite: Boolean,
 ) : Parcelable, SweetDiff {
 
     override val diffId: String

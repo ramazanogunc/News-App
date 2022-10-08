@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ramo.myapplication.ui.home.HomeFragment"
+        android:name="com.ramo.newsapp.ui.home.HomeFragment"
         android:label="HomeFragment" />
 </navigation>

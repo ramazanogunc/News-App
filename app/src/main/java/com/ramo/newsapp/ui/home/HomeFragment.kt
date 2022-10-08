@@ -16,6 +16,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         safeBinding {
             changeStatusBarColor(toolbar)
             rv.render { parent: ViewGroup, _: Int, _: News -> NewsViewHolder(parent) }
+            rv.onScrollEnd {
+                rv.isPaginationEnable = false
+                viewModel.nextNews()
+            }
             rv.setOnItemClickListener { _, _, data: News ->
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToNewsDetailFragment2(

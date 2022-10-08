@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "329688400436",
+    "project_id": "news-app-2ca18",
+    "storage_bucket": "news-app-2ca18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329688400436:android:a2b047f0a9908a116ec061",
+        "android_client_info": {
+          "package_name": "com.ramo.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329688400436-l6u1eer5hv5ve3vb6jgsm3j4sbd89d46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzecse7DbnXa2YdPex_BSdoy3c1PqFxyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329688400436-l6u1eer5hv5ve3vb6jgsm3j4sbd89d46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

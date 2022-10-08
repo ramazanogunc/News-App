@@ -28,7 +28,7 @@
 
         <com.ramo.sweetrecycler.SweetRecyclerView
             android:id="@+id/rv"
-            list="@{vm.news}"
+            dataList="@{vm.news}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scrollbars="vertical"

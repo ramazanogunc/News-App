@@ -38,5 +38,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             badge.isVisible = true
             badge.number = it.size
         }
+
     }
 }

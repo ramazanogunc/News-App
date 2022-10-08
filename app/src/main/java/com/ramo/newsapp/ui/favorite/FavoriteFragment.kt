@@ -5,9 +5,11 @@ import androidx.navigation.fragment.findNavController
 import com.ramo.newsapp.R
 import com.ramo.newsapp.core.BaseFragment
 import com.ramo.newsapp.core.ext.observeExt
+import com.ramo.newsapp.core.ext.safeContext
 import com.ramo.newsapp.databinding.FragmentFavoriteBinding
 import com.ramo.newsapp.domain.model.News
 import com.ramo.newsapp.ui.common.viewholder.NewsViewHolder
+import com.ramo.newsapp.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,9 +39,15 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         observeExt(viewModel.news) {
             binding?.rv?.notifyDataSetChanged()
         }
+        safeContext {
+            viewModel.getFavorites(Utils.getDeviceId(it))
+        }
+
     }
 
     private fun onFavClick(news: News) {
-        viewModel.changeFavorite(news)
+        safeContext {
+            viewModel.changeFavorite(Utils.getDeviceId(it), news)
+        }
     }
 }

@@ -4,8 +4,7 @@ import com.ramo.newsapp.domain.model.News
 import com.ramo.newsapp.domain.repository.NewsRepository
 
 class FakeRepository : NewsRepository {
-
-    override suspend fun getNews(page: Int): List<News> {
+    override suspend fun getNews(deviceId: String, page: Int): List<News> {
         return listOf(
             News(
                 "Mükkemel Haber 1 ",
@@ -34,12 +33,17 @@ class FakeRepository : NewsRepository {
         )
     }
 
-    override suspend fun addFavorites(news: News) {
-        news.isFavorite = true
+    override suspend fun getFavorites(deviceId: String): MutableList<News> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun deleteFavorites(news: News) {
-        news.isFavorite = false
-
+    override suspend fun addFavorites(deviceId: String, news: News) {
+        TODO("Not yet implemented")
     }
+
+    override suspend fun deleteFavorites(deviceId: String, news: News) {
+        TODO("Not yet implemented")
+    }
+
+
 }

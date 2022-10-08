@@ -1,6 +1,8 @@
 package com.ramo.newsapp.di
 
 import com.ramo.newsapp.domain.repository.NewsRepository
+import com.ramo.newsapp.domain.usecase.ChangeFavoriteUseCase
+import com.ramo.newsapp.domain.usecase.GetFavoritesUseCase
 import com.ramo.newsapp.domain.usecase.GetNewsUseCase
 import dagger.Module
 import dagger.Provides
@@ -17,5 +19,16 @@ object UseCaseModule {
     @Singleton
     fun provideGetNewsUseCase(newsRepository: NewsRepository): GetNewsUseCase =
         GetNewsUseCase(newsRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetFavoritesUseCase(newsRepository: NewsRepository): GetFavoritesUseCase =
+        GetFavoritesUseCase(newsRepository)
+
+    @Provides
+    @Singleton
+    fun provideChangeFavoriteUseCase(newsRepository: NewsRepository): ChangeFavoriteUseCase =
+        ChangeFavoriteUseCase(newsRepository)
+
 
 }

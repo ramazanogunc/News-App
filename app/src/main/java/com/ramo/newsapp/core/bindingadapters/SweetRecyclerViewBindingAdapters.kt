@@ -6,8 +6,8 @@ import com.ramo.sweetrecycler.SweetRecyclerView
 object SweetRecyclerViewBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("list", "pagingEnabled", requireAll = false)
-    fun <T> SweetRecyclerView.list(
+    @BindingAdapter("dataList", "pagingEnabled", requireAll = false)
+    fun <T> SweetRecyclerView.dataList(
         list: List<T>?,
         pagingEnabled: Boolean?
     ) {

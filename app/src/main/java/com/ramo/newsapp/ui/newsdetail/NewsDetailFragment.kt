@@ -14,7 +14,9 @@ import androidx.compose.material.icons.rounded.BookmarkBorder
 import androidx.compose.material.icons.sharp.OpenInBrowser
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
@@ -22,6 +24,7 @@ import coil.compose.AsyncImage
 import com.ramo.newsapp.core.BaseComposeFragment
 import com.ramo.newsapp.core.ext.observeExt
 import com.ramo.newsapp.ui.favorite.FavoriteViewModel
+import com.ramo.newsapp.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,8 +43,9 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
             Scaffold(
                 floatingActionButton = {
                     Column {
+                        val ct = LocalContext.current
                         FloatingActionButton(onClick = {
-                            favoriteViewModel.changeFavorite(viewModel.news)
+                            favoriteViewModel.changeFavorite(Utils.getDeviceId(ct), viewModel.news)
                         }) {
                             Icon(
                                 imageVector = if (viewModel.isFavorite)
@@ -69,7 +73,8 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
                         AsyncImage(
                             modifier = Modifier.fillMaxWidth(),
                             model = viewModel.news.imageUrl,
-                            contentDescription = null
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop
                         )
                     }
                     item {

@@ -16,17 +16,21 @@ class HomeViewModel @Inject constructor(
 
     private val _news = MutableLiveData<List<News>>()
     val news: LiveData<List<News>> get() = _news
+
     var isLastPage: Boolean = false
     private var page = 1
-        private set
 
-    init {
-        getNews()
-    }
+    var deviceId: String = ""
+        set(value) {
+            val oldState = field
+            field = value
+
+            if (oldState.isBlank()) getNews()
+        }
 
     private fun getNews() {
         safeScope {
-            val news = getNewsUseCase(page)
+            val news = getNewsUseCase(GetNewsUseCase.Params(deviceId, page))
             _news.value = _news.value?.merge(news) ?: news
             if (news.size < 20) // max page item size 20
                 isLastPage = true

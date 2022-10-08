@@ -6,21 +6,38 @@ import com.ramo.newsapp.domain.model.News
 import com.ramo.newsapp.domain.repository.NewsRepository
 import javax.inject.Inject
 
+
 class NewsRepositoryImpl @Inject constructor(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
 ) : Repository(), NewsRepository {
 
-    override suspend fun getNews(page: Int): List<News> {
-        val data = remoteDataSource.getNews("us", page)
-        return data.toNews()
+    override suspend fun getNews(deviceId: String, page: Int): List<News> {
+        return exec {
+            val data = remoteDataSource.getNews("us", page)
+            val favs = remoteDataSource.getFavorites(deviceId)
+            val list = data.toNews()
+            list.forEach { it.isFavorite = favs.contains(it) }
+            list
+        }
     }
 
-    override suspend fun addFavorites(news: News) {
-        news.isFavorite = true
+    override suspend fun getFavorites(deviceId: String): MutableList<News> {
+        return exec {
+            remoteDataSource.getFavorites(deviceId)
+        }
     }
 
-    override suspend fun deleteFavorites(news: News) {
-        news.isFavorite = false
+    override suspend fun addFavorites(deviceId: String, news: News) {
+        return exec {
+            news.isFavorite = true
+            remoteDataSource.addFavorites(deviceId, news)
+        }
+    }
 
+    override suspend fun deleteFavorites(deviceId: String, news: News) {
+        return exec {
+            news.isFavorite = false
+            remoteDataSource.removeFavorites(deviceId, news)
+        }
     }
 }

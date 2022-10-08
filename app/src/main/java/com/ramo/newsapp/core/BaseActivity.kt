@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.ramo.newsapp.BR
 import com.ramo.newsapp.R
 import com.ramo.newsapp.core.ext.findGenericWithType
 import com.ramo.newsapp.core.ext.observeExt
@@ -66,6 +67,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel>(
     private fun initViewModel() {
         val vmClass = javaClass.findGenericWithType<VM>(1)
         viewModel = ViewModelProvider(this)[vmClass]
+        binding?.setVariable(BR.vm,viewModel)
     }
 
     protected open fun onChangeLoading(isLoading: Boolean) {

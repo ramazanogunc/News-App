@@ -12,6 +12,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.ramo.newsapp.BR
 import com.ramo.newsapp.R
 import com.ramo.newsapp.core.ext.findGenericWithType
 import com.ramo.newsapp.core.ext.observeExt
@@ -75,6 +76,7 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel>(
         viewModel = ViewModelProvider(
             if (isSharedViewModel()) requireActivity() else this
         )[vmClass]
+        binding?.setVariable(BR.vm,viewModel)
     }
 
     protected open fun onChangeLoading(isLoading: Boolean) {

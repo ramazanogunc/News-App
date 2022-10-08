@@ -1,7 +1,6 @@
 package com.ramo.newsapp.ui.favorite
 
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ramo.newsapp.R
 import com.ramo.newsapp.core.BaseFragment
@@ -16,11 +15,10 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
     R.layout.fragment_favorite
 ) {
 
-    private val favViewModel by activityViewModels<FavoriteViewModel>()
+    override fun isSharedViewModel(): Boolean = true
 
     override fun init() {
         safeBinding {
-            vm = favViewModel
             changeStatusBarColor(toolbar)
             rv.render { parent: ViewGroup, _: Int, _: News ->
                 NewsViewHolder(
@@ -36,12 +34,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
                 )
             }
         }
-        observeExt(favViewModel.news) {
+        observeExt(viewModel.news) {
             binding?.rv?.notifyDataSetChanged()
         }
     }
 
     private fun onFavClick(news: News) {
-        favViewModel.changeFavorite(news)
+        viewModel.changeFavorite(news)
     }
 }

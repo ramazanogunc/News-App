@@ -24,8 +24,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:cornerRadius="@{16}"
-            bind:imageUrl="@{item.imageUrl}" />
+            cornerRadius="@{16}"
+            imageUrl="@{item.imageUrl}" />
 
         <TextView
             style="@style/H2"

@@ -6,7 +6,7 @@ import com.ramo.sweetrecycler.SweetRecyclerView
 object SweetRecyclerViewBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("bind:list")
+    @BindingAdapter("list")
     fun <T> SweetRecyclerView.list(list: List<T>) {
         if (isPaginationEnable) addData(list)
         else setData(list)

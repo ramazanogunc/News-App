@@ -7,13 +7,13 @@ import androidx.databinding.BindingAdapter
 object ViewBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("bind:visible")
+    @BindingAdapter("visible")
     fun changeVisibility(view: View, visible: Boolean) {
         view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
-    @BindingAdapter("bind:onSafeClick")
+    @BindingAdapter("onSafeClick")
     fun View.onSafeClick(onClick: () -> Unit) {
         setOnClickListener(SafeClickListener {
             onClick()

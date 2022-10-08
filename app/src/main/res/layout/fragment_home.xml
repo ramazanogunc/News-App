@@ -33,7 +33,7 @@
             android:layout_height="0dp"
             tools:listitem="@layout/item_news"
             android:scrollbars="vertical"
-            bind:list="@{vm.news}"
+            list="@{vm.news}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

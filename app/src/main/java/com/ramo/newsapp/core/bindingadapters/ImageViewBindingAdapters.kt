@@ -8,7 +8,7 @@ import com.ramo.newsapp.core.ext.loadImage
 object ImageViewBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("bind:imageUrl", "bind:cornerRadius", requireAll = false)
+    @BindingAdapter("imageUrl", "cornerRadius", requireAll = false)
     fun ImageView.imageUrl(url: String?, cornerRadius: Int?) {
         url ?: return
         this.loadImage(url, cornerRadius = cornerRadius ?: 0)

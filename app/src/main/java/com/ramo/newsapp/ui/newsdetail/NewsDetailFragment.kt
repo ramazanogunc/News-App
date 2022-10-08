@@ -14,20 +14,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import androidx.fragment.app.activityViewModels
 import coil.compose.AsyncImage
 import com.ramo.newsapp.core.BaseComposeFragment
+import com.ramo.newsapp.ui.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
 
+    private val favoriteViewModel by activityViewModels<FavoriteViewModel>()
+
     override fun content(): ComposeView = createComposeView {
         MaterialTheme {
             Scaffold(
                 floatingActionButton = {
                     Column {
-                        FloatingActionButton(onClick = { /*TODO*/ }) {
+                        FloatingActionButton(onClick = {
+                            favoriteViewModel.addFavorite(viewModel.news)
+                        }) {
                             Icon(imageVector = Icons.Sharp.Favorite, contentDescription = "")
                         }
                         Spacer(modifier = Modifier.size(8.dp))

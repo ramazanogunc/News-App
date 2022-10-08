@@ -13,12 +13,21 @@ class FavoriteViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase
 ) : BaseViewModel() {
 
-    private val _news = MutableLiveData<List<News>>()
-    val news: LiveData<List<News>> get() = _news
+    private val _news = MutableLiveData<MutableList<News>>()
+    val news: LiveData<MutableList<News>> get() = _news
 
     init {
-        safeScope {
+        safeScope(loadingVisible = false) {
 
         }
+    }
+
+    fun addFavorite(news: News) {
+        news.isFavorite = true
+        if (_news.value == null)
+            _news.value = mutableListOf(news)
+        else
+            _news.value?.add(0, news)
+        _news.value = _news.value
     }
 }

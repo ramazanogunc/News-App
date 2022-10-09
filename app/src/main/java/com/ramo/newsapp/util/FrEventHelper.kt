@@ -47,6 +47,7 @@ object FrEventHelper {
                 is Double -> putDouble(it.key, value)
                 is Map<*, *> -> {
                     try {
+                        @Suppress("UNCHECKED_CAST")
                         putBundle(it.key, mapToBundle(value as Map<String, Any?>))
                     } catch (e: Exception) {
                         Log.e("TAG", "Nested event parameter problem.")

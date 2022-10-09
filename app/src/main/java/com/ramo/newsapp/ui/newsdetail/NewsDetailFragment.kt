@@ -17,10 +17,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import coil.compose.AsyncImage
+import com.ramo.newsapp.R
 import com.ramo.newsapp.core.BaseComposeFragment
 import com.ramo.newsapp.core.ext.observeExt
 import com.ramo.newsapp.ui.favorite.FavoriteViewModel
@@ -52,7 +54,7 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
                                     Icons.Rounded.Bookmark
                                 else
                                     Icons.Rounded.BookmarkBorder,
-                                contentDescription = ""
+                                contentDescription = stringResource(id = R.string.cd_news_fav_btn)
                             )
                         }
                         Spacer(modifier = Modifier.size(8.dp))
@@ -61,7 +63,10 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
                                 Intent(Intent.ACTION_VIEW, viewModel.news.url.toUri())
                             startActivity(browserIntent)
                         }) {
-                            Icon(imageVector = Icons.Sharp.OpenInBrowser, contentDescription = "")
+                            Icon(
+                                imageVector = Icons.Sharp.OpenInBrowser,
+                                contentDescription = stringResource(id = R.string.cd_open_link)
+                            )
                         }
                     }
                 }
@@ -73,7 +78,7 @@ class NewsDetailFragment : BaseComposeFragment<NewsDetailViewModel>() {
                         AsyncImage(
                             modifier = Modifier.fillMaxWidth(),
                             model = viewModel.news.imageUrl,
-                            contentDescription = null,
+                            contentDescription = stringResource(id = R.string.cd_news),
                             contentScale = ContentScale.Crop
                         )
                     }

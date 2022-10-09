@@ -3,4 +3,9 @@
     <string name="error">Error</string>
     <string name="ok">Ok</string>
     <string name="favorite_title">Favorites</string>
+    <string name="bottom_home">Home</string>
+    <string name="bottom_favorites">Favorites</string>
+    <string name="cd_news">News cover photo</string>
+    <string name="cd_news_fav_btn">Fav button</string>
+    <string name="cd_open_link">Open in browser</string>
 </resources>

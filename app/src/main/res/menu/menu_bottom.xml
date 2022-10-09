@@ -4,9 +4,9 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_round_home"
-        android:title="Home" />
+        android:title="@string/bottom_home" />
     <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/ic_round_bookmark"
-        android:title="Favorites" />
+        android:title="@string/bottom_favorites" />
 </menu>

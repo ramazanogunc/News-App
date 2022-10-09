@@ -1,7 +1,6 @@
 package com.ramo.newsapp
 
 import com.ramo.newsapp.data.remote.RemoteDataSource
-import com.ramo.newsapp.data.remote.RemoteDataSourceImpl
 import com.ramo.newsapp.data.remote.response.ArticlesItem
 import com.ramo.newsapp.data.remote.response.TopHeadlinesResponse
 import com.ramo.newsapp.data.repository.NewsRepositoryImpl
@@ -17,7 +16,7 @@ import org.mockito.Mockito.mock
 class NewsRepositoryUnitTest {
 
     private val testDeviceId = "unit_test_device_id"
-    private val remoteDataSource: RemoteDataSource = mock(RemoteDataSourceImpl::class.java)
+    private val remoteDataSource: RemoteDataSource = mock(RemoteDataSource::class.java)
     private val repository: NewsRepository = NewsRepositoryImpl(remoteDataSource)
     private val response = TopHeadlinesResponse(
         articles = listOf(

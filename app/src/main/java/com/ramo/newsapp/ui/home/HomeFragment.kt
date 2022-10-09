@@ -21,7 +21,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     override fun init() {
         safeBinding {
-            changeStatusBarColor(toolbar)
             rv.render { parent: ViewGroup, _: Int, _: News ->
                 NewsViewHolder(
                     parent,
@@ -57,6 +56,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             viewModel.deviceId = Utils.getDeviceId(it)
             favViewModel.getFavorites(viewModel.deviceId)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        safeBinding { changeStatusBarColor(toolbar) }
     }
 
     private fun onFavClick(news: News) {

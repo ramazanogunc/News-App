@@ -21,7 +21,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
 
     override fun init() {
         safeBinding {
-            changeStatusBarColor(toolbar)
             rv.render { parent: ViewGroup, _: Int, _: News ->
                 NewsViewHolder(
                     parent,
@@ -42,7 +41,11 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         safeContext {
             viewModel.getFavorites(Utils.getDeviceId(it))
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        safeBinding { changeStatusBarColor(toolbar) }
     }
 
     private fun onFavClick(news: News) {

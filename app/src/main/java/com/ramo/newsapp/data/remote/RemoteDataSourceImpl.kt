@@ -6,7 +6,7 @@ import com.ramo.newsapp.data.remote.response.TopHeadlinesResponse
 import com.ramo.newsapp.domain.model.News
 import kotlinx.coroutines.tasks.await
 
-class RemoteDataSourceImpl(
+open class RemoteDataSourceImpl(
     private val newsService: NewsService
 ) : RemoteDataSource {
 

@@ -16,7 +16,10 @@ class NewsRepositoryImpl @Inject constructor(
             val data = remoteDataSource.getNews("us", page)
             val favs = remoteDataSource.getFavorites(deviceId)
             val list = data.toNews()
-            list.forEach { it.isFavorite = favs.contains(it) }
+            list.forEach { realNews ->
+                realNews.isFavorite =
+                    favs.any { realNews.diffId == it.diffId }
+            }
             list
         }
     }
